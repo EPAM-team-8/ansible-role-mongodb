@@ -23,10 +23,3 @@
     group: root
     mode: 0644
   notify: 'restart-db'
-
-  handlers:
-  - name: 'Restart Mongodb'
-    systemd:
-      name: mongod.service
-      state: restarted
-    listen: 'restart-db'
