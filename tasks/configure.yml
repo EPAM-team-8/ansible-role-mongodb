@@ -1,0 +1,32 @@
+---
+
+- name: 'Start Mongodb'
+  systemd:
+    name: mongod.service
+    state: started
+
+- name: create mongodb user
+  mongodb_user:
+    login_database: '{{ db_name }}'
+    name: '{{ db_user }}'
+    password: '{{ db_pass }}'
+    database: '{{ db_name }}'
+    roles: readWrite
+    state: present
+    update_password: on_create
+
+- name: Copy mongodb config
+  template:
+    src: mongod.conf.j2
+    dest: /etc/mongod.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: 'restart-db'
+
+  handlers:
+  - name: 'Restart Mongodb'
+    systemd:
+        name: mongod.service
+        state: restarted
+    listen: 'restart-db'
