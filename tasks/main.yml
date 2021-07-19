@@ -1,0 +1,7 @@
+---
+
+- name: 'Install mongodb'
+  include_tasks: 'components.yml'
+
+- name: 'Configure mongodb'
+  include_tasks: 'configure.yml'

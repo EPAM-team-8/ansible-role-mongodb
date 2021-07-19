@@ -1,0 +1,29 @@
+---
+
+- name: Add GPT key
+  apt_key:
+    url: 'https://www.mongodb.org/static/pgp/server-5.0.asc'
+    state: present
+
+- name: install gnupg and python3-pip 
+  apt:
+    name:
+      - gnupg
+      - python3-pip
+    state: present
+    update_cache: true
+
+- name: install pymongo
+  pip:
+    name: pymongo
+
+- name: add deb
+  apt_repository:
+    repo: deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse
+    state: present
+    filename: 'mongodb-org-5.0.list'
+
+- name: install mongo-db
+  apt:
+    name: mongodb-org
+    state: present
