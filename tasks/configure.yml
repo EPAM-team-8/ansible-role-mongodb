@@ -17,8 +17,8 @@
 
 - name: Copy mongodb config
   template:
-    src: mongod.conf.j2
-    dest: /etc/mongod.conf
+    src: 'mongod.conf.j2'
+    dest: '/etc/mongod.conf'
     owner: root
     group: root
     mode: 0644
