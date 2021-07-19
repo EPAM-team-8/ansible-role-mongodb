@@ -27,6 +27,6 @@
   handlers:
   - name: 'Restart Mongodb'
     systemd:
-        name: mongod.service
-        state: restarted
+      name: mongod.service
+      state: restarted
     listen: 'restart-db'
